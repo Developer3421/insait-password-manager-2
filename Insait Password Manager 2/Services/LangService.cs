@@ -40,6 +40,9 @@ public class LangService
             ["digits"]             = "Digits",
             ["special"]            = "Symbols",
             ["generate"]           = "Generate password",
+            ["not_found_title"]    = "Page not found",
+            ["not_found_message"]  = "The page you requested does not exist or is no longer available.",
+            ["back_to_generator"]  = "Go to password generator",
         },
 
         // ── Ukrainian ──────────────────────────────────────────────
@@ -61,6 +64,9 @@ public class LangService
             ["digits"]             = "Цифри",
             ["special"]            = "Спецсимволи",
             ["generate"]           = "Генерувати пароль",
+            ["not_found_title"]    = "Сторінку не знайдено",
+            ["not_found_message"]  = "Сторінка, яку ви запитали, не існує або більше недоступна.",
+            ["back_to_generator"]  = "До генератора паролів",
         },
 
         // ── Russian ────────────────────────────────────────────────
@@ -82,6 +88,9 @@ public class LangService
             ["digits"]             = "Цифры",
             ["special"]            = "Спецсимволы",
             ["generate"]           = "Генерировать пароль",
+            ["not_found_title"]    = "Страница не найдена",
+            ["not_found_message"]  = "Запрошенная страница не существует или больше недоступна.",
+            ["back_to_generator"]  = "К генератору паролей",
         },
 
         // ── Turkish ────────────────────────────────────────────────
@@ -103,6 +112,9 @@ public class LangService
             ["digits"]             = "Rakamlar",
             ["special"]            = "Semboller",
             ["generate"]           = "Şifre oluştur",
+            ["not_found_title"]    = "Sayfa bulunamadı",
+            ["not_found_message"]  = "İstediğiniz sayfa mevcut değil veya artık kullanılamıyor.",
+            ["back_to_generator"]  = "Şifre oluşturucuya git",
         },
 
         // ── German ─────────────────────────────────────────────────
@@ -124,7 +136,9 @@ public class LangService
             ["digits"]             = "Ziffern",
             ["special"]            = "Sonderzeichen",
             ["generate"]           = "Passwort generieren",
+            ["not_found_title"]    = "Seite nicht gefunden",
+            ["not_found_message"]  = "Die angeforderte Seite existiert nicht oder ist nicht mehr verfügbar.",
+            ["back_to_generator"]  = "Zum Passwortgenerator",
         },
     };
 }
-
