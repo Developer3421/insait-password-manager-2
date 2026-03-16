@@ -1,5 +1,19 @@
 ﻿@page "/not-found"
 @layout MainLayout
+@inject LangService Lang
 
-<h3>Not Found</h3>
-<p>Sorry, the content you are looking for does not exist.</p>
+<PageTitle>404</PageTitle>
+
+<div class="not-found-page">
+    <section class="not-found-card">
+        <div class="not-found-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M11 7H13V13H11V7M11 15H13V17H11V15Z" />
+            </svg>
+        </div>
+        <div class="not-found-code">404</div>
+        <h1>@Lang.T("not_found_title")</h1>
+        <p>@Lang.T("not_found_message")</p>
+        <a class="not-found-button" href="password-generator">@Lang.T("back_to_generator")</a>
+    </section>
+</div>

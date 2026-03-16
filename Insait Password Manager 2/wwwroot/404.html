@@ -1,23 +1,251 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="utf-8" />
-    <title>Insait Password Manager 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 • Insait Password Manager 2</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --page-bg: #F5E6D3;
+            --card-bg: #FDF7EF;
+            --card-border: #E8D5B7;
+            --accent: #7D2AE8;
+            --accent-hover: #6922c7;
+            --text: #404040;
+            --muted: #6b6257;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: var(--page-bg);
+            color: var(--text);
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border: 1.5px solid var(--card-border);
+            border-radius: 999px;
+            background: var(--card-bg);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            width: min(100%, 680px);
+            padding: 32px;
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            background: var(--card-bg);
+            box-shadow: 0 24px 60px rgba(125, 42, 232, 0.08);
+        }
+
+        .icon {
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            border-radius: 18px;
+            background: rgba(125, 42, 232, 0.12);
+            color: var(--accent);
+        }
+
+        h1 {
+            margin: 20px 0 12px;
+            font-size: clamp(2rem, 5vw, 3rem);
+            line-height: 1.05;
+        }
+
+        p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .route {
+            margin-top: 18px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(125, 42, 232, 0.08);
+            color: var(--text);
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+        }
+
+        .button-primary {
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            color: #fff;
+        }
+
+        .button-primary:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .button-secondary {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text);
+        }
+
+        .button-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        @media (max-width: 640px) {
+            .page {
+                padding: 18px;
+            }
+
+            .card {
+                padding: 24px;
+                border-radius: 20px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
     <script>
-        // Single Page Apps for GitHub Pages
-        // Encodes the current URL's path/query/hash as a query parameter and
-        // redirects to the root index.html so the Blazor router can handle it.
-        // pathSegmentsToKeep = 1 because this is a project page (/repo-name/).
-        var pathSegmentsToKeep = 1;
-        var l = window.location;
-        l.replace(
-            l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-            l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-            l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-            l.hash
-        );
+        (function () {
+            var pathSegmentsToKeep = 1;
+            var routes = {
+                home: "",
+                generator: "password-generator",
+                counter: "counter",
+                weather: "weather",
+                notFound: "not-found"
+            };
+            var knownRoutes = new Set(Object.values(routes));
+            var locationInfo = window.location;
+            var segments = locationInfo.pathname.split('/').filter(Boolean);
+            var baseSegments = segments.slice(0, pathSegmentsToKeep);
+            var routeSegments = segments.slice(pathSegmentsToKeep);
+            var routePath = routeSegments.join('/');
+            var basePath = '/' + baseSegments.join('/');
+
+            if (knownRoutes.has(routePath)) {
+                locationInfo.replace(
+                    locationInfo.protocol + '//' + locationInfo.host + basePath + '/?/' +
+                    routePath.replace(/&/g, '~and~') +
+                    (locationInfo.search ? '&' + locationInfo.search.slice(1).replace(/&/g, '~and~') : '') +
+                    locationInfo.hash
+                );
+                return;
+            }
+
+            window.insaitBasePath = basePath;
+            window.insaitRoutes = routes;
+        }());
     </script>
 </head>
-<body></body>
+<body>
+    <div class="page">
+        <header class="page-header">
+            <div class="status-pill">Custom 404</div>
+        </header>
+
+        <main class="content">
+            <section class="card">
+                <div class="icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M11 7H13V13H11V7M11 15H13V17H11V15Z" />
+                    </svg>
+                </div>
+                <h1>Сторінку не знайдено</h1>
+                <p>
+                    Це окрема 404-сторінка для GitHub Pages, а не копія індексної сторінки.
+                    Спробуйте повернутися до генератора паролів або на головну сторінку застосунку.
+                </p>
+                <div class="route">
+                    Запитаний шлях:
+                    <strong id="requested-route"></strong>
+                </div>
+                <div class="actions">
+                    <a class="button button-primary" id="generator-link" href="/">До генератора паролів</a>
+                    <a class="button button-secondary" id="home-link" href="/">На головну</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        (function () {
+            var basePath = window.insaitBasePath || '';
+            var routes = window.insaitRoutes || {};
+            var maxDisplayPathLength = 96;
+            var truncationLength = maxDisplayPathLength - 3;
+            var joinPath = function (left, right) {
+                var normalizedLeft = left.replace(/\/+$/, '');
+                var normalizedRight = (right || '').replace(/^\/+/, '');
+                return normalizedLeft + '/' + normalizedRight;
+            };
+            var requestedRoute = document.getElementById('requested-route');
+            var fullPath = window.location.pathname;
+            requestedRoute.textContent = fullPath.length > maxDisplayPathLength
+                ? fullPath.slice(0, truncationLength) + '...'
+                : fullPath;
+            requestedRoute.title = fullPath;
+            document.getElementById('generator-link').href = joinPath(basePath, routes.generator || 'password-generator');
+            document.getElementById('home-link').href = joinPath(basePath, '');
+        }());
+    </script>
+</body>
 </html>
