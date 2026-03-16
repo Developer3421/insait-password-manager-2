@@ -1,16 +1,36 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@inject LangService Lang
+@implements IDisposable
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<div class="app-layout">
+    <header class="app-header">
+        <div class="lang-switcher">
+            <button class="lang-btn @(Lang.CurrentLang == "en" ? "active" : "")" @onclick='() => SwitchLang("en")'>
+                🇬🇧 EN
+            </button>
+            <button class="lang-btn @(Lang.CurrentLang == "uk" ? "active" : "")" @onclick='() => SwitchLang("uk")'>
+                🇺🇦 UK
+            </button>
+            <button class="lang-btn @(Lang.CurrentLang == "ru" ? "active" : "")" @onclick='() => SwitchLang("ru")'>
+                🇷🇺 RU
+            </button>
+            <button class="lang-btn @(Lang.CurrentLang == "tr" ? "active" : "")" @onclick='() => SwitchLang("tr")'>
+                🇹🇷 TR
+            </button>
+            <button class="lang-btn @(Lang.CurrentLang == "de" ? "active" : "")" @onclick='() => SwitchLang("de")'>
+                🇩🇪 DE
+            </button>
         </div>
+    </header>
 
-        <article class="content px-4">
-            @Body
-        </article>
+    <main class="app-main">
+        @Body
     </main>
 </div>
+
+@code {
+    protected override void OnInitialized() => Lang.OnChange += StateHasChanged;
+    public void Dispose() => Lang.OnChange -= StateHasChanged;
+    private void SwitchLang(string lang) => Lang.SetLang(lang);
+}
+

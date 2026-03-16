@@ -1,7 +1,10 @@
 ﻿@page "/"
+@inject NavigationManager Navigation
 
-<PageTitle>Home</PageTitle>
+@code {
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateTo("/password-generator");
+    }
+}
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
