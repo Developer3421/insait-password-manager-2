@@ -166,12 +166,19 @@
     <script>
         (function () {
             var pathSegmentsToKeep = 1;
-            var knownRoutes = new Set(["", "password-generator", "counter", "weather", "not-found"]);
+            var routes = {
+                home: "",
+                generator: "password-generator",
+                counter: "counter",
+                weather: "weather",
+                notFound: "not-found"
+            };
+            var knownRoutes = new Set(Object.values(routes));
             var locationInfo = window.location;
             var segments = locationInfo.pathname.split('/').filter(Boolean);
             var baseSegments = segments.slice(0, pathSegmentsToKeep);
             var routeSegments = segments.slice(pathSegmentsToKeep);
-            var routePath = routeSegments.join('/').replace(/\/+$/, '');
+            var routePath = routeSegments.join('/');
             var basePath = '/' + baseSegments.join('/');
 
             if (knownRoutes.has(routePath)) {
@@ -185,6 +192,7 @@
             }
 
             window.insaitBasePath = basePath;
+            window.insaitRoutes = routes;
         }());
     </script>
 </head>
@@ -221,9 +229,22 @@
     <script>
         (function () {
             var basePath = window.insaitBasePath || '';
-            document.getElementById('requested-route').textContent = window.location.pathname;
-            document.getElementById('generator-link').href = basePath + '/password-generator';
-            document.getElementById('home-link').href = basePath + '/';
+            var routes = window.insaitRoutes || {};
+            var maxDisplayPathLength = 96;
+            var truncationLength = maxDisplayPathLength - 3;
+            var joinPath = function (left, right) {
+                var normalizedLeft = left.replace(/\/+$/, '');
+                var normalizedRight = (right || '').replace(/^\/+/, '');
+                return normalizedLeft + '/' + normalizedRight;
+            };
+            var requestedRoute = document.getElementById('requested-route');
+            var fullPath = window.location.pathname;
+            requestedRoute.textContent = fullPath.length > maxDisplayPathLength
+                ? fullPath.slice(0, truncationLength) + '...'
+                : fullPath;
+            requestedRoute.title = fullPath;
+            document.getElementById('generator-link').href = joinPath(basePath, routes.generator || 'password-generator');
+            document.getElementById('home-link').href = joinPath(basePath, '');
         }());
     </script>
 </body>
