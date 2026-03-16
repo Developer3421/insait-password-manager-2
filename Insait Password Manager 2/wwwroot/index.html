@@ -15,6 +15,20 @@
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
     <script type="importmap"></script>
+    <script>
+        // Single Page Apps for GitHub Pages
+        // Restores the path that was encoded by 404.html so Blazor can route to it.
+        (function (l) {
+            if (l.search[1] === '/') {
+                var decoded = l.search.slice(1).split('&').map(function (s) {
+                    return s.replace(/~and~/g, '&');
+                }).join('?');
+                window.history.replaceState(null, null,
+                    l.pathname.replace(/\/$/, '') + decoded + l.hash
+                );
+            }
+        }(window.location));
+    </script>
 </head>
 
 <body>
